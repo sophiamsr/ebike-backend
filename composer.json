@@ -1,0 +1,19 @@
+{
+    "require": {
+        "vlucas/phpdotenv": "^2.4",
+        "nesbot/carbon": "^2.66",
+        "guzzlehttp/psr7": "^2.4",
+        "kreait/firebase-php": "^7.0",
+        "firebase/php-jwt": "^6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
