@@ -1,0 +1,4 @@
+/vendor
+.env
+composer.lock
+dev-jau5d5r7zymxt44k.pem
