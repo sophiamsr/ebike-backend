@@ -1,7 +1,6 @@
 <?php
 require 'bootstrap.php';
 use Carbon\Carbon;
-
 function validateToken($token) {
    
     // Set the public certificate file path
