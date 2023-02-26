@@ -1,7 +1,7 @@
 <?php
 require 'bootstrap.php';
 use Carbon\Carbon;
-function validateToken($token) {
+function validateToken($token, $email) {
    
     // Set the public certificate file path
     $cert_file_path = '/Applications/XAMPP/xamppfiles/htdocs/api/dev-jau5d5r7zymxt44k.pem';
@@ -25,6 +25,9 @@ function validateToken($token) {
     // Verify the JWT signature using the certificate
     $verification_result = openssl_verify($tokenParts[0] . '.' . $tokenParts[1], $jwt_signature, $cert, OPENSSL_ALGO_SHA256);
 
+  
+   
+    
     // Check the verification result
     if ($verification_result === 1) {
         // JWT signature is valid
@@ -35,7 +38,13 @@ function validateToken($token) {
         } else {
             // Token is valid and not expired
             echo "Token is valid and not expired";
-            return true;
+            if (strpos($payload,$email) !== false){
+                echo "true";
+                return true;
+            }else{
+                echo "false"; 
+                return false;
+            }
         }
     } else {
         // JWT signature is invalid

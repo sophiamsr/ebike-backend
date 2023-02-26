@@ -1,7 +1,7 @@
 <?php
 
 require 'validation.php';
-
+require 'sendEmail.php';
     header('Access-Control-Allow-Origin: *');
    
     if (function_exists($_GET['f'])){
@@ -22,7 +22,7 @@ require 'validation.php';
         // Validate the JWT token
         $token = $_GET['token'];
         
-        if (! validateToken($token)) {
+        if (! validateToken($token, $email)) {
             die("Invalid token."); 
         }
         // Fahrrad wird bei User eingetragen und Zeit 
@@ -70,15 +70,24 @@ require 'validation.php';
         // Validate the JWT token
         $token = $_GET['token'];
         
-        if (! validateToken($token)) {
+        if (! validateToken($token, $email)) {
             die("Invalid token."); 
         }
         
-        $sqlTime = "SELECT `timeOfRent`FROM User WHERE email = '$email'";
+        $sqlTime = "SELECT `timeOfRent`, `first name`FROM User WHERE email = '$email'";
         $resultTime = mysqli_query($conn, $sqlTime);
         $rowTime = mysqli_fetch_assoc($resultTime);
         $time = $rowTime['timeOfRent'];
+        $name =$rowTime['first name'];
         
+
+        $sqlPremium = "SELECT `premium` FROM `EBike` WHERE id = $bike";
+        $resultPremium = mysqli_query($conn, $sqlPremium);
+        $rowPremium = mysqli_fetch_assoc($resultPremium);
+        $premium = $rowPremium ['premium'];
+        echo "Hallo1";
+        sendMail($time, $email, $station, $name, $premium);
+        echo "hallo2";
 
         $sql = "UPDATE `User` SET bike = NULL, timeOfRent = null WHERE email= '$email';"; 
 
@@ -96,26 +105,24 @@ require 'validation.php';
         if (mysqli_query($conn, $sql) ){
             echo "User hat erfolgreich zurückgegeben.";
         }else{
-            echo "Error: Could not able to execute §sql." . 
+            echo "Error: Could not able to execute $sql." . 
         mysqli_error($conn);    
         }
 
         if(mysqli_query($conn, $sql2)){
             echo "EBike wurde abgedatet.";
         }else{
-            echo "Error: Could not able to execute §sql." . 
+            echo "Error: Could not able to execute $sql." . 
         mysqli_error($conn);   
         }
         if (mysqli_query($conn, $sql3) ){
             echo "Station wurde abgedatet .";
         }else{
-            echo "Error: Could not able to execute §sql." . 
+            echo "Error: Could not able to execute $sql." . 
         mysqli_error($conn);    
         }
 
         mysqli_close($conn);
-
-        return $time;
 
         }
 
