@@ -21,7 +21,7 @@ function sendMail($time, $email, $station, $name, $premium){
     $betreff = "Rechnung EBike Rent Mannheim - vom $date";
     $from ="From: EBike Rent Mannheim <sophia.sauer1502@gmail.com>";
     $text = "Hallo $name, \n \n du hast am $date ein Fahrrad ausgeliehen und an der Station $station zurückgegeben. 
-    \nDeine Fahrtzeit betrug $total Minuten. Bei einem Preis von 0,10 €/ 0,15€ (für das Premium-Bike) ergibt sich eine Rechnung von $preis €.
+    \nDeine Fahrtzeit betrug $total Stunden. Bei einem Preis von 0,10 €/ 0,15€ (für das Premium-Bike) ergibt sich eine Rechnung von $preis €.
     \nBitte überweise den Betrag innerhalb der nächsten 14 Tage.
     \n\n Viele Grüße und Danke, dass Du mit uns gefahren bist!
     \n Dein EBike Rent Mannheim Team";

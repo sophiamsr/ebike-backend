@@ -6,6 +6,13 @@
     }
     //Abfrage von User
     function getUser(){
+        $token = $_GET['token'];
+        $email = $_GET['email'];
+        
+        if (! validateToken($token, $email)) {
+            die("Invalid token."); 
+        }
+
         $con = mysqli_connect("localhost", "root", "", "EBikeRental");
         $response = array();
         if($con) {
@@ -21,6 +28,7 @@
                      $response[$x]['address'] = $row['address'];
                      $response[$x]['email'] = $row['email'];
                      $response[$x]['bike'] = $row['bike'];
+                     $response[$x]['timeOfRent'] = $row['timeOfRent'];
                      $x++;
                  }
                 echo json_encode($response, JSON_PRETTY_PRINT);

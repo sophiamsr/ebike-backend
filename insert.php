@@ -15,7 +15,8 @@
             die('Could not connect: ' . mysqli_connect_error());
         }
         
-        $sql = "INSERT INTO `User` (`id`, `username`, `first name`, `last name`, `address`, `email`, `bike`) VALUES (NULL, '$username', '$firstname', '$lastname','$address', '$email', NULL);";
+        $sql = "INSERT INTO `User` (`id`, `username`, `first name`, `last name`, `address`, `email`, `bike`) 
+        VALUES (NULL, '$username', '$firstname', '$lastname','$address', '$email', NULL);";
         echo $sql;
 
         if (mysqli_query($conn, $sql)){
