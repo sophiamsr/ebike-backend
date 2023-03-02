@@ -86,8 +86,8 @@ require 'sendEmail.php';
         $rowPremium = mysqli_fetch_assoc($resultPremium);
         $premium = $rowPremium ['premium'];
       
-        sendMail($time, $email, $station, $name, $premium);
-        getPrice($bike, $time);
+        //sendMail($time, $email, $station, $name, $premium);
+        //getPrice($bike, $time);
 
         $sql = "UPDATE `User` SET bike = NULL, timeOfRent = null WHERE email= '$email';"; 
 
@@ -97,36 +97,22 @@ require 'sendEmail.php';
        
         $countOfBikes = $rowTime['countOfBikes'];
         $maxCountOfBikes = $rowTime['maxCountOfBikes'];
-        
-        if(($countOfBikes+1)<=$maxCountOfBikes){
+        if(($countOfBikes)<$maxCountOfBikes){
+            ++ $countOfBikes; 
+            
             $sql2 = "UPDATE `EBike` SET lentto = NULL, station = $station WHERE id = $bike;";
-            $sql3 = "UPDATE `station` SET countOfBikes = countOfBikes +1 where id = $station;";
+            $sql3 = "UPDATE `station` SET countOfBikes = $countOfBikes  where id = $station;";
+           
 
-        if (mysqli_query($conn, $sql) ){
-            echo "User hat erfolgreich zurückgegeben.";
-        }else{
-            echo "Error: Could not able to execute $sql." . 
-        mysqli_error($conn);    
+            if (mysqli_query($conn, $sql)&&mysqli_query($conn, $sql2) &&mysqli_query($conn, $sql3)){
+                die("User hat erfolgreich zurückgegeben.") ;
+            }else{
+                echo "Error: Could not able to execute $sql." . 
+            mysqli_error($conn);    
+            }
         }
-
-        if(mysqli_query($conn, $sql2)){
-            echo "EBike wurde abgedatet.";
-        }else{
-            echo "Error: Could not able to execute $sql." . 
-        mysqli_error($conn);   
-        }
-        if (mysqli_query($conn, $sql3) ){
-            echo "Station wurde abgedatet .";
-        }else{
-            echo "Error: Could not able to execute $sql." . 
-        mysqli_error($conn);    
-        }
-
+      
         mysqli_close($conn);
-
-        }
-
-        
     }
     
 ?>
