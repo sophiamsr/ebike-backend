@@ -87,7 +87,7 @@ require 'sendEmail.php';
         $premium = $rowPremium ['premium'];
       
         sendMail($time, $email, $station, $name, $premium);
-        
+        getPrice($bike, $time);
 
         $sql = "UPDATE `User` SET bike = NULL, timeOfRent = null WHERE email= '$email';"; 
 

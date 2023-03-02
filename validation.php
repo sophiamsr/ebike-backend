@@ -4,7 +4,7 @@ use Carbon\Carbon;
 function validateToken($token, $email) {
    
     // Set the public certificate file path
-    $cert_file_path = '/Applications/XAMPP/xamppfiles/htdocs/api/dev-jau5d5r7zymxt44k.pem';
+    $cert_file_path = '/Applications/XAMPP/xamppfiles/htdocs/ebike-backend/dev-jau5d5r7zymxt44k.pem';
     
     // Decode the JWT token and get the signature
     $tokenParts = explode('.', $token);
@@ -37,9 +37,9 @@ function validateToken($token, $email) {
             return false;
         } else {
             // Token is valid and not expired
-            echo "Token is valid and not expired";
+            //echo "Token is valid and not expired";
             if (strpos($payload,$email) !== false){
-                echo "true";
+                //echo "true";
                 return true;
             }else{
                 echo "false"; 

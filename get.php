@@ -1,11 +1,15 @@
 <?php
     header('Access-Control-Allow-Origin: *');
+    header("HTTP/1.1 200 OK");
+
+    require 'validation.php';
 
     if (function_exists($_GET['f'])){
         $_GET['f']();
     }
     //Abfrage von User
     function getUser(){
+
         $token = $_GET['token'];
         $email = $_GET['email'];
         
@@ -16,26 +20,26 @@
         $con = mysqli_connect("localhost", "root", "", "EBikeRental");
         $response = array();
         if($con) {
-            $sql = "select * from User";
+            $sql = "select * from User where email = '$email'";
             $result = mysqli_query($con,$sql);
-             if($result){
-                 $x = 0;
-                 while ($row = mysqli_fetch_assoc($result)){
-                     $response[$x]['id'] = $row['id'];
-                     $response[$x]['username'] = $row['username'];
-                     $response[$x]['first name'] = $row['first name'];
-                     $response[$x]['last name'] = $row['last name'];
-                     $response[$x]['address'] = $row['address'];
-                     $response[$x]['email'] = $row['email'];
-                     $response[$x]['bike'] = $row['bike'];
-                     $response[$x]['timeOfRent'] = $row['timeOfRent'];
-                     $x++;
-                 }
-                echo json_encode($response, JSON_PRETTY_PRINT);
-             }
-             else{
-                echo "Datebase connection failed";
-             }
+            $row = mysqli_fetch_assoc($result);
+            if ($row['id']!== null){
+                http_response_code(200);
+
+                $response['id'] = $row['id']; 
+                $response['username'] = $row['username'];
+                $response['firstname']  = $row['first name'];
+                $response['lastname'] = $row['last name'];
+                $response['address'] = $row['address'];
+                $response['email'] = $row['email'];
+                $response['bike'] = $row['bike'];
+                $response['timeOfRent'] = $row['timeOfRent']; 
+                echo json_encode($response,JSON_PRETTY_PRINT);      
+                }
+                
+            else{
+                echo http_response_code(404);
+            }
         }
         
     }
@@ -73,6 +77,7 @@
                  $z = 0;
                  while ($row = mysqli_fetch_assoc($result2)){
                      $response2[$z]['id'] = $row['id'];
+                     $response2[$z]['premium']= $row['premium'];
                      $response2[$z]['name'] = $row['name'];
                      $response2[$z]['station'] = $row['station'];
                      $response2[$z]['battery level'] = $row['battery level'];
