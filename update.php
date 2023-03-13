@@ -87,7 +87,7 @@ require 'sendEmail.php';
         $premium = $rowPremium ['premium'];
       
         //sendMail($time, $email, $station, $name, $premium);
-        //getPrice($bike, $time);
+        getPrice($bike, $time);
 
         $sql = "UPDATE `User` SET bike = NULL, timeOfRent = null WHERE email= '$email';"; 
 
@@ -105,7 +105,7 @@ require 'sendEmail.php';
            
 
             if (mysqli_query($conn, $sql)&&mysqli_query($conn, $sql2) &&mysqli_query($conn, $sql3)){
-                die("User hat erfolgreich zurückgegeben.") ;
+                die(" ") ;
             }else{
                 echo "Error: Could not able to execute $sql." . 
             mysqli_error($conn);    
