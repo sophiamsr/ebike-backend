@@ -80,7 +80,7 @@
                      $response2[$z]['premium']= $row['premium'];
                      $response2[$z]['name'] = $row['name'];
                      $response2[$z]['station'] = $row['station'];
-                     $response2[$z]['battery level'] = $row['battery level'];
+                     $response2[$z]['batteryLevel'] = $row['batteryLevel'];
                      $response2[$z]['lentto'] = $row['lentto'];
                      $z++;
                  }
