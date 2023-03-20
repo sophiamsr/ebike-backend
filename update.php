@@ -1,8 +1,9 @@
 <?php
+ header('Access-Control-Allow-Origin: *');
 
 require 'validation.php';
 require 'sendEmail.php';
-    header('Access-Control-Allow-Origin: *');
+   
    
     if (function_exists($_GET['f'])){
         $_GET['f']();
