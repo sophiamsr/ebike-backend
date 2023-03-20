@@ -102,4 +102,25 @@ function getTotalMinutes(DateInterval $int)
     return ($int->d * 24 * 60) + ($int->h * 60) + $int->i;
 }
 
+function lowerBattery($bikeID){
+   
+    $con = mysqli_connect("localhost", "root", "", "EBikeRental");
+    $sql = "select batteryLevel from EBike where id = '$bikeID'";
+
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    $batteryLevel = $row['batteryLevel'];
+    $min = 0;
+    $a = random_int($min,$batteryLevel);
+    echo $a;
+
+    $updateBattery = $batteryLevel - $a;
+    echo $updateBattery;
+
+    $sql1= "UPDATE `EBike` SET `batteryLevel`='$updateBattery' WHERE `id` =$bikeID";
+    $result = mysqli_query($con, $sql1);
+    echo $result;
+
+}
 ?>
