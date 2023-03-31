@@ -92,7 +92,7 @@ function getPrice($bikeID, $time)
         $preis = $total * 0.1;
 
     }
-    echo '{' . $preis . '}';
+    echo '{ "value": "' . $preis . '"}';
     $ret = array($preis, $total);
     return ($ret);
 }
