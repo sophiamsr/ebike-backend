@@ -1,7 +1,7 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     header("HTTP/1.1 200 OK");
-
+    
     require 'validation.php';
 
     if (function_exists($_GET['f'])){
