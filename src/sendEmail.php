@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '/Applications/XAMPP/xamppfiles/htdocs/ebike-backend/vendor/phpmailer/phpmailer/src/Exception.php';
-require '/Applications/XAMPP/xamppfiles/htdocs/ebike-backend/vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '/Applications/XAMPP/xamppfiles/htdocs/ebike-backend/vendor/phpmailer/phpmailer/src/SMTP.php';
+require '/Applications/XAMPP/xamppfiles/htdocs/ebike-backend/src/vendor/phpmailer/phpmailer/src/Exception.php';
+require '/Applications/XAMPP/xamppfiles/htdocs/ebike-backend/src/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require '/Applications/XAMPP/xamppfiles/htdocs/ebike-backend/src/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 if (function_exists($_GET['f'])) {
     $_GET['f']();
@@ -28,7 +28,6 @@ function sendMail($email, $station)
     $preis = $hilfe[0];
 
     $total = $hilfe[1];
-    echo $total;
 
     $date = date('d-m-y');
 
@@ -58,7 +57,6 @@ function sendMail($email, $station)
     // Send the email
     try {
         $mail->send();
-        echo 'Email sent successfully';
     } catch (Exception $e) {
         echo 'An error occurred while sending the email: ' . $mail->ErrorInfo;
     }
@@ -113,14 +111,14 @@ function lowerBattery($bikeID){
     $batteryLevel = $row['batteryLevel'];
     $min = 0;
     $a = random_int($min,$batteryLevel);
-    echo $a;
+    //echo $a;
 
     $updateBattery = $batteryLevel - $a;
-    echo $updateBattery;
+    //echo $updateBattery;
 
     $sql1= "UPDATE `EBike` SET `batteryLevel`='$updateBattery' WHERE `id` =$bikeID";
     $result = mysqli_query($con, $sql1);
-    echo $result;
+    //echo $result;
 
 }
 ?>

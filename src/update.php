@@ -76,7 +76,6 @@ require 'sendEmail.php';
         $time = $rowTime['timeOfRent'];
     
         sendMail($email, $station);
-        getPrice($bike, $time);
         lowerBattery($bike);
         $sql = "UPDATE `User` SET bike = NULL, timeOfRent = null WHERE email= '$email';"; 
 
