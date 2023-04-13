@@ -46,7 +46,7 @@ function sendMail($email, $station)
 
     // Set the email details
     $mail->setFrom('sophia.sauer1502@gmail.com', 'E-Bike Rent Mannheim');
-    $mail->addAddress('sophia@blauer-loewe.de', 'Sophia Sauer');
+    $mail->addAddress($email);
     $mail->Subject = 'Rechnung E-Bike Rent Mannheim';
     $mail->CharSet = 'UTF-8'; // Set the character encoding to UTF-8
     $mail->Body = "Hallo $name, \n \n du hast am $date ein Fahrrad ausgeliehen und an der Station $station zurückgegeben. 
