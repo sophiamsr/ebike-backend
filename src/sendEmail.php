@@ -38,8 +38,8 @@ function sendMail($email, $station)
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'sophia.sauer1502@gmail.com';
-    $mail->Password = 'cbmzqtydfwalwglb';
+    $mail->Username = '';
+    $mail->Password = '';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
